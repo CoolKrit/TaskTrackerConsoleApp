@@ -52,6 +52,7 @@ public class Main {
         taskManager.getSubtaskById(sub2.getId());
         taskManager.getEpicById(epic2.getId());
         taskManager.getSubtaskById(sub3.getId());
+        taskManager.getTaskById(task1.getId());
 
         // Удаление задачи и эпика
         taskManager.removeTaskById(task2.getId());

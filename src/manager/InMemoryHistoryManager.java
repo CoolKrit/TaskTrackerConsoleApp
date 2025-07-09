@@ -1,25 +1,47 @@
 package manager;
 
 import manager.interfaces.HistoryManager;
+import model.CustomLinkedList;
+import model.Node;
 import model.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private final List<Task> history = new ArrayList<>();
-    private static final int MAX_HISTORY_SIZE = 10;
+    private final CustomLinkedList<Task> history = new CustomLinkedList<>();
+    private final Map<Integer, Node<Task>> historyMap = new HashMap<>();
 
     @Override
     public void add(Task task) {
-        if (history.size() == MAX_HISTORY_SIZE) {
-            history.removeFirst();
+        if (task == null) return;
+
+        remove(task.getId());
+
+        Node<Task> node = new Node<>(task);
+        history.linkLast(node);
+        historyMap.put(task.getId(), node);
+    }
+
+    @Override
+    public void remove(int id) {
+        Node<Task> node = historyMap.get(id);
+        if (node != null) {
+            history.removeNode(node);
+            historyMap.remove(id);
         }
-        history.add(task);
     }
 
     @Override
     public List<Task> getHistory() {
-        return new ArrayList<>(history);
+        Node<Task> current = history.getHead();
+        List<Task> historyInfo = new ArrayList<>();
+        while (current != null) {
+            historyInfo.add(current.getData());
+            current = current.getNext();
+        }
+        return historyInfo;
     }
 }
