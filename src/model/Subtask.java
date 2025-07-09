@@ -1,20 +1,22 @@
 package model;
 
 import enums.Status;
+import enums.Type;
 
 public class Subtask extends Task {
     private int epicId;
 
     public Subtask(int epicId, String name, String description) {
         super(name, description);
-        this.status = Status.NEW;
+        setStatus(Status.NEW);
         this.epicId = epicId;
     }
 
-    public Subtask(int id, int epicId, String name, String description, Status status) {
+    public Subtask(int id, int epicId, String name, String description, Status status, Type type) {
         super(name, description);
-        this.id = id;
-        this.status = status;
+        setId(id);
+        setStatus(status);
+        setType(type);
         this.epicId = epicId;
     }
 
@@ -25,10 +27,10 @@ public class Subtask extends Task {
     @Override
     public String toString() {
         return "Subtask{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", status=" + getStatus() +
                 ", epicId=" + epicId +
                 '}';
     }

@@ -1,0 +1,6 @@
+id,type,name,status,description,epic
+1,TASK,Переезд,NEW,Собрать вещи,
+6,EPIC,Отпуск,NEW,Съездить в отпуск,
+7,SUBTASK,Забронировать отель,NEW,Через Booking,6
+
+1,6,7

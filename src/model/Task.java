@@ -1,20 +1,23 @@
 package model;
 
 import enums.Status;
+import enums.Type;
 
 import java.util.Objects;
 
 public class Task {
-    protected int id;
-    protected String name;
-    protected String description;
-    protected Status status;
+    private int id;
+    private Type type;
+    private String name;
+    private String description;
+    private Status status;
 
-    public Task(int id, String name, String description, Status status) {
+    public Task(int id, String name, String description, Status status, Type type) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
+        this.type = type;
     }
 
     public Task(String name, String description) {
@@ -29,6 +32,14 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -78,6 +89,7 @@ public class Task {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", type='" + type + '\'' +
                 ", status=" + status +
                 '}';
     }

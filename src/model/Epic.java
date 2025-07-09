@@ -1,6 +1,7 @@
 package model;
 
 import enums.Status;
+import enums.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,15 @@ public class Epic extends Task {
 
     public Epic(String name, String description) {
         super(name, description);
-        this.status = Status.NEW;
+        setStatus(Status.NEW);
+        this.subtasks = new ArrayList<>();
+    }
+
+    public Epic(int id, String name, String description, Status status, Type type) {
+        super(name, description);
+        setId(id);
+        setStatus(status);
+        setType(type);
         this.subtasks = new ArrayList<>();
     }
 
@@ -53,7 +62,7 @@ public class Epic extends Task {
 
     public void updateStatus() {
         if (subtasks.isEmpty()) {
-            this.status = Status.NEW;
+            setStatus(Status.NEW);
             return;
         }
 
@@ -66,21 +75,21 @@ public class Epic extends Task {
         }
 
         if (countNew == subtasks.size()) {
-            this.status = Status.NEW;
+            setStatus(Status.NEW);
         } else if (countDone == subtasks.size()) {
-            this.status = Status.DONE;
+            setStatus(Status.DONE);
         } else {
-            this.status = Status.IN_PROGRESS;
+            setStatus(Status.IN_PROGRESS);
         }
     }
 
     @Override
     public String toString() {
         return "Epic{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", status=" + getStatus() +
                 ", subtasksCount=" + subtasks.size() +
                 '}';
     }

@@ -1,6 +1,7 @@
 package manager;
 
 import enums.Status;
+import enums.Type;
 import manager.interfaces.HistoryManager;
 import manager.interfaces.TaskManager;
 import model.Epic;
@@ -20,11 +21,36 @@ public class InMemoryTaskManager implements TaskManager {
         return nextId++;
     }
 
+    public Map<Integer, Task> getTasks() {
+        return tasks;
+    }
+
+    public Map<Integer, Epic> getEpics() {
+        return epics;
+    }
+
+    public Map<Integer, Subtask> getSubtasks() {
+        return subtasks;
+    }
+
+    public int getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(int nextId) {
+        this.nextId = nextId;
+    }
+
+    public HistoryManager getHistoryManager() {
+        return historyManager;
+    }
+
     // ===== ЗАДАЧИ =====
     @Override
     public void createTask(Task task) {
         int id = generateId();
         task.setId(id);
+        task.setType(Type.TASK);
         tasks.put(id, task);
     }
 
@@ -65,6 +91,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void createEpic(Epic epic) {
         int id = generateId();
         epic.setId(id);
+        epic.setType(Type.EPIC);
         epics.put(id, epic);
     }
 
@@ -125,6 +152,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (epic != null) {
             int id = generateId();
             subtask.setId(id);
+            subtask.setType(Type.SUBTASK);
             subtasks.put(id, subtask);
             epic.addSubtask(subtask);
         }

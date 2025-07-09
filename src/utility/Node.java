@@ -1,4 +1,4 @@
-package model;
+package utility;
 
 public class Node<T> {
     private T data;

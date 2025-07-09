@@ -1,8 +1,8 @@
 package manager;
 
 import manager.interfaces.HistoryManager;
-import model.CustomLinkedList;
-import model.Node;
+import utility.CustomLinkedList;
+import utility.Node;
 import model.Task;
 
 import java.util.ArrayList;
